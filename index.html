@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Ilon O'yini</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Bosh Ekran -->
+  <div id="homeScreen" class="home-screen">
+    <div class="home-menu">
+      <h1 class="game-title">ILON O'YINI</h1>
+      <button id="resumeBtn" class="main-btn" data-i18n="resume">▶ Davom ettirish</button>
+      <button id="classicModeBtn" class="main-btn" data-i18n="classicMode">🎮 Klassik Rejim</button>
+      <button id="missionModeBtn" class="main-btn" data-i18n="missionMode">⏱️ Missiya Rejimi (60s)</button>
+      <button id="infoBtn" class="main-btn">ℹ️ Ma'lumot</button>
+      <button id="shopBtn" class="main-btn" data-i18n="shopMenu">🛒 Do'kon</button>
+      <button id="skinsBtn" class="main-btn" data-i18n="skinsMenu">🎨 Skinlar</button>
+      <button id="achievementsBtn" class="main-btn" data-i18n="achievementsMenu">🏆 Yutuqlar</button>
+      <button id="homeSettingsBtn" class="main-btn" data-i18n="settingsMenu">⚙️ Sozlamalar</button>
+    </div>
+  </div>
+
+  <!-- Level / Missiya Banner Oynasi -->
+  <div id="levelBanner" class="level-banner hidden">
+    <div class="level-banner-box">
+      <h2 id="levelBannerTitle">1-MISSIYA</h2>
+      <p id="levelBannerText">MUVAFFAQIYATLI BAJARILDI!</p>
+    </div>
+  </div>
+
+  <!-- Ma'lumot Oynasi -->
+  <div id="infoModal" class="modal hidden">
+    <div class="modal-content info-modal-content">
+      <h2>ℹ️ O'yin Haqida Ma'lumot</h2>
+      
+      <div class="info-section">
+        <h3>📱 Boshqaruv:</h3>
+        <p>• <b>Kompyuterda:</b> Sichqonchani (Mouse) harakatlantirib ilonni boshqaring.</p>
+        <p>• <b>Telefonda:</b> Barmoq bilan ekranni istalgan joyiga bosing va harakatlantiring (Dinamik Joystik orqali).</p>
+      </div>
+
+      <div class="info-section">
+        <h3>🎁 Bonuslar va Vazifalari:</h3>
+        <p>• 🔴 <b>Qizil Yulduz:</b> Faqat 3s turadi! Yeganda skin sotib olish uchun +5 ta yulduzcha beradi.</p>
+        <p>• ⭐ <b>Sariq Yulduz:</b> Ilon ochkosini (Score) oshiradi.</p>
+        <p>• 🛡️ <b>Zashita (Qalqon):</b> Qora ilonlar va to'siqlardan himoya qiladi (8 soniya).</p>
+        <p>• ⚡ <b>Tezlik:</b> Ilon harakatini tezlashtiradi.</p>
+        <p>• ❄️ <b>Sekinlashtirish:</b> Ilonni sekinroq harakatlantiradi.</p>
+        <p>• 🧲 <b>Magnit:</b> Atrofdagi oziqlarni o'ziga tortadi.</p>
+        <p>• 💣 <b>Bomba:</b> Ochko ayiradi.</p>
+        <p>• 📉 / 📈 <b>Kichrayish/Kattalashish:</b> Ilon hajmini o'zgartiradi.</p>
+      </div>
+
+      <button id="closeInfo" class="close-btn" data-i18n="close">Yopish</button>
+    </div>
+  </div>
+
+  <!-- Yuqori Boshqaruv va Ma'lumot Paneli -->
+  <div id="topGamePanel" class="top-game-panel hidden">
+    <div class="panel-left">
+      <button id="pauseBtn" class="settings-btn square-btn" data-i18n="pauseBtn">⏸️</button>
+      <div id="levelDisplay"><span data-i18n="level">DAROJA</span>: 1</div>
+      <div id="missionTimerDisplay" class="time-attack-display hidden">⏱️ <span id="missionSeconds">60</span>s</div>
+    </div>
+
+    <div class="panel-center-group">
+      <div id="topCenterTimer" class="top-center-timer hidden">
+        <span id="timerLabel">⚡BONUS</span>: <span id="shieldSeconds">10</span>s
+      </div>
+      <div id="comboDisplay" class="combo-display hidden">
+        🔥 <span id="comboText">2x COMBO!</span>
+      </div>
+      <div id="missionDisplay" class="mission-display hidden">
+        🎯 <span id="missionText">Missiya yuklanmoqda...</span>
+      </div>
+    </div>
+
+    <div id="scoreBoard" class="score-board">
+      <div>⭐ <span id="coinScore">0</span></div>
+      <div><span data-i18n="score">Achko</span>: <span id="score">0</span></div>
+    </div>
+  </div>
+
+  <!-- Pauza Oynasi -->
+  <div id="pauseModal" class="modal hidden">
+    <div class="modal-content">
+      <h2 data-i18n="pauseTitle">⏸️ PAUZA</h2>
+      <button id="pauseResumeBtn" class="menu-action-btn primary-action" data-i18n="resume">▶ Davom ettirish</button>
+      <button id="pauseRestartBtn" class="menu-action-btn restart-action" data-i18n="restart">🔄 Qayta boshlash</button>
+      <button id="pauseHomeBtn" class="menu-action-btn home-action" data-i18n="home">🏠 Bosh ekran</button>
+    </div>
+  </div>
+
+  <!-- Do'kon Oynasi -->
+  <div id="shopModal" class="modal hidden">
+    <div class="modal-content">
+      <h2 data-i18n="shopTitle">🛒 Do'kon & Skinlar</h2>
+      <div class="shop-balance">Balans: <span id="totalCoins">0</span> ⭐</div>
+      <div class="skins-list shop-scroll-list">
+        <button id="buyGoldBtn" class="shop-item-btn" data-skin="gold">⭐ Oltin Skin (30 ⭐)</button>
+        <button id="buyRainbowBtn" class="shop-item-btn" data-skin="rainbow">🌈 Kamalak Skin (50 ⭐)</button>
+        <button id="buyCyberBtn" class="shop-item-btn" data-skin="cyber">💻 Cyberpunk (70 ⭐)</button>
+        <button id="buyMatrixBtn" class="shop-item-btn" data-skin="matrix">🟢 Matrix (90 ⭐)</button>
+        <button id="buyGoldFireBtn" class="shop-item-btn" data-skin="goldfire">🔥 Gold Fire (120 ⭐)</button>
+        <button id="buyGalaxyBtn" class="shop-item-btn" data-skin="galaxy">🌌 Galaxy (150 ⭐)</button>
+      </div>
+      <button id="closeShop" class="close-btn" data-i18n="close">Yopish</button>
+    </div>
+  </div>
+
+  <!-- Sozlamalar Oynasi -->
+  <div id="settingsModal" class="modal hidden">
+    <div class="modal-content">
+      <button id="homeBtn" class="menu-action-btn home-action" data-i18n="home">🏠 Bosh ekran</button>
+      <button id="restartBtn" class="menu-action-btn restart-action" data-i18n="restart">🔄 Qayta boshlash</button>
+      <button id="soundToggleBtn" class="menu-action-btn sound-action" data-i18n="soundOn">🔊 Ovoz: Yoqilgan</button>
+      
+      <hr class="divider">
+      <h2 data-i18n="languageTitle">Tilni Tanlash</h2>
+      <div class="lang-selector">
+        <button class="lang-btn active" data-lang="uz">🇺🇿 UZ</button>
+        <button class="lang-btn" data-lang="ru">🇷🇺 RU</button>
+        <button class="lang-btn" data-lang="en">🇬🇧 EN</button>
+      </div>
+
+      <hr class="divider">
+      <h2 data-i18n="difficultyTitle">Qiyinlik Darajasi</h2>
+      <button class="diff-btn active" data-diff="easy" data-i18n="diffEasy">Oson</button>
+      <button class="diff-btn" data-diff="medium" data-i18n="diffMedium">O'rtacha</button>
+      <button class="diff-btn" data-diff="hard" data-i18n="diffHard">Qiyin</button>
+      <button class="diff-btn danger" data-diff="super" data-i18n="diffSuper">☠️ Super Qiyin</button>
+      <button id="closeSettings" class="close-btn" data-i18n="close">Yopish</button>
+    </div>
+  </div>
+
+  <!-- Skinlar Oynasi -->
+  <div id="skinsModal" class="modal hidden">
+    <div class="modal-content">
+      <h2 data-i18n="skinsTitle">🎨 Ilon Skinlari</h2>
+      <div class="skins-list shop-scroll-list">
+        <button class="skin-btn active" data-skin="neon">🟢 Neon Ko'k</button>
+        <button class="skin-btn" data-skin="fire">🔥 Olovli Qizil</button>
+        <button class="skin-btn" id="menuGoldBtn" data-skin="gold" disabled>🔒 Oltin</button>
+        <button class="skin-btn" id="menuRainbowBtn" data-skin="rainbow" disabled>🔒 Kamalak</button>
+        <button class="skin-btn" id="menuCyberBtn" data-skin="cyber" disabled>🔒 Cyberpunk</button>
+        <button class="skin-btn" id="menuMatrixBtn" data-skin="matrix" disabled>🔒 Matrix</button>
+        <button class="skin-btn" id="menuGoldFireBtn" data-skin="goldfire" disabled>🔒 Gold Fire</button>
+        <button class="skin-btn" id="menuGalaxyBtn" data-skin="galaxy" disabled>🔒 Galaxy</button>
+      </div>
+      <button id="closeSkins" class="close-btn" data-i18n="close">Yopish</button>
+    </div>
+  </div>
+
+  <!-- Yutuqlar Oynasi -->
+  <div id="achievementsModal" class="modal hidden">
+    <div class="modal-content">
+      <h2 data-i18n="achievementsTitle">🏆 Yutuqlar</h2>
+      <div class="achievements-list">
+        <div id="ach1" data-i18n="ach1_text">🔒 Yangi boshlovchi (10 ochko)</div>
+        <div id="ach2" data-i18n="ach2_text">🔒 Ilon ustasi (50 ochko)</div>
+        <div id="ach3" data-i18n="ach3_text">🔒 Chaqqon ovchi (100 ochko)</div>
+      </div>
+      <button id="closeAchievements" class="close-btn" data-i18n="close">Yopish</button>
+    </div>
+  </div>
+
+  <!-- Dinamik Joystik -->
+  <div id="dynamicJoystick" class="dynamic-joystick hidden">
+    <div class="joystick-base">
+      <div id="joystickStick" class="joystick-stick"></div>
+    </div>
+  </div>
+
+  <canvas id="gameCanvas"></canvas>
+
+  <script src="script.js"></script>
+</body>
+</html>
